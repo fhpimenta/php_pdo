@@ -6,7 +6,9 @@
  * Time: 10:57
  */
 
+require_once 'EntidadeInterface.php';
 require_once 'Cliente.php';
+require_once 'ServiceDB.php';
 
 try {
     $conexao = new \PDO("mysql:host=localhost;dbname=pdo", "root", "1234");
@@ -16,15 +18,7 @@ try {
 }
 $cliente = new Cliente($conexao);
 
-//$cliente->setId(1);
-//$cliente->setName('Felipe Meneses');
-//$cliente->setEmail('fhpimenta12@gmail.com');
+$serviceDb = new ServiceDB($conexao, $cliente);
+$resultado = $serviceDb->getColumns();
 
-
-$resultado = $cliente->find(1);
 print_r($resultado);
-/*
-foreach($cliente->find(1) as $c) {
-    echo $c['name']."<br>";
-}
-*/
